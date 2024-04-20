@@ -23,19 +23,25 @@ interface FetchGamesResponse {
 }
 
 const useGames = () => {
-    // for storing our game objects
-    const [games, setGames] = useState<Game[]>([]) // Specify the type of the state as an array of Game objects
+    const [games, setGames] = useState<Game[]>([]) // Specify the type of the state as
     const [error, setError] = useState('')
-    // using useEffect to fetch data from the API
+    const [isLoading, setLoading]=useState(false);
+
     useEffect(() =>{
       const controller = new AbortController();
+
+      setLoading(true);
       // Fetch the data from the API
       apiClient.get<FetchGamesResponse>('/games', { signal: controller.signal })
-        .then((response) => setGames(response.data.results)) // Access the response data when setting the state
+        .then((response) => {
+          setGames(response.data.results);
+          setLoading(false);
+        }) // Access the response data when setting the state
         // Catch any errors and set the error state
         .catch((error) => {
           if (error instanceof CanceledError ) return;
           setError(error.message);
+          setLoading(false)
         })
       //  if (error instanceof CanceledError): This line checks if the error is specifically a CanceledError.
       // If it is, the function returns early (i.e., no further code execution), effectively ignoring the error.
@@ -44,7 +50,7 @@ const useGames = () => {
         // Clean up function
         return () => controller.abort();
     }, []);
-    return ({ games, error});
+    return ({ games, error, isLoading});
 }
 
 export default useGames
