@@ -3,6 +3,9 @@ import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
 
+// The useData Hook
+// This custom hook is designed to fetch data from an API and handle loading and error states. It uses generics to be reusable for different data types.
+
 interface FetchResponse<T>{
   count: number;
   results: T[];
