@@ -2,23 +2,20 @@ import { List, ListItem, HStack, Image, Text, Spinner, Button, Heading} from "@c
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
-
 interface Props {
   onSelectGenre: (genre: Genre) => void;
   selectedGenre: Genre | null;
 
 }
 
-
 const GenreList = ({selectedGenre, onSelectGenre}: Props) => {
   const { data, isLoading, error} = useGenres();
   // We are taking data, and isLoading from the useGenres hook
-
-
-  if (error) return null
-  if (isLoading) return <Spinner   thickness='4px'
-  speed='0.65s'
-  size='xl'/>;
+  // if we we would like to use genres from the serve, we will use the following code. 
+  // if (error) return null
+  // if (isLoading) return <Spinner   thickness='4px'
+  // speed='0.65s'
+  // size='xl'/>;
 
   return (
     <>
