@@ -52,9 +52,9 @@ function App() {
             ></PlatformSelector>
             </Box>
             <SortSelector
-            sortOrder={gameQuery.sortOrder}
-            onSelectSortOrder={(sortOrder)=> setGameQuery({...gameQuery, sortOrder})}>
-            </SortSelector>
+              sortOrder={gameQuery.sortOrder}
+              onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })}
+            />
           </Flex>
         </Box>
         <GameGrid
